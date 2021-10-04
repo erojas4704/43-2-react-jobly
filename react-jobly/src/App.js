@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./routes/Home";
@@ -9,6 +9,7 @@ import Login from "./routes/Login";
 import SignUp from "./routes/Signup";
 import Profile from "./routes/Profile";
 import JoblyAPI from "./JoblyAPI";
+import jwt from "jsonwebtoken";
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -17,15 +18,22 @@ const App = () => {
 
   const signup = async form => {
     const token = await JoblyAPI.register(form.username, form.password, form.firstName, form.lastName, form.email);
-    if (token) setUser(form.username);
     setToken(token);
   }
 
   const login = async form => {
     const token = await JoblyAPI.login(form.username, form.password);
-    if (token) setUser(form.token);
     setToken(token);
   }
+
+  useEffect(async () => {
+    if (token) {
+      const { username } = await jwt.decode(token);
+      const userData = await JoblyAPI.getUserInfo(username);
+      setUser(userData.username);
+    }
+
+  }, [token]);
 
   return (
     <div className="App">

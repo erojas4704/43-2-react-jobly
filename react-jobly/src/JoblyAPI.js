@@ -51,7 +51,6 @@ class JoblyAPI {
             JoblyAPI.token = res.token;
             return res.token;
         } catch (err) {
-            console.log("CATCHED", err);
             JoblyAPI.token = undefined;
             return err;
         }
@@ -64,6 +63,15 @@ class JoblyAPI {
             return res.token;
         } catch (err) {
             JoblyAPI.token = undefined;
+            return err;
+        }
+    }
+
+    static async getUserInfo(username) {
+        try {
+            let res = await this.request(`users/${username}`);
+            return res.user;
+        } catch (err) {
             return err;
         }
     }
