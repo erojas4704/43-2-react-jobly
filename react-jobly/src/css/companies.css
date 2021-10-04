@@ -1,0 +1,25 @@
+.companies-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.company-card > *{
+    margin-bottom: .3rem;
+}
+
+.company-card{
+    width: 24rem;
+    margin: 1rem;
+    color: white;
+    background-color: #2980b9;
+    border-radius: .5rem;
+    padding: .5rem;
+}
+
+.company-card-name{
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-bottom: 1px solid white;
+    margin-bottom: .3rem;
+}
