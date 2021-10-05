@@ -1,4 +1,5 @@
 import axios from 'axios';
+// TODO better error handling that's not ass
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -75,10 +76,31 @@ class JoblyAPI {
             return err;
         }
     }
-}
 
-JoblyAPI.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+    static async patchUser(user, data) {
+        try {
+            //Prune all empty strings from data so the server doesn't try to process them when it's updating profiles.
+            for (const key in data) {
+                if (data[key].length < 1) {
+                    delete data[key];
+                }
+            }
+
+            let res = await this.request(`users/${user.username}`, data, 'patch');
+            return res.user;
+        } catch (err) {
+            return err;
+        }
+    }
+
+    static async applyToJob(user, jobID) {
+        try {
+            let res = await this.request(`users/${user.username}/jobs/${jobID}`, {}, 'post');
+            return res.applied;
+        } catch (err) {
+            return err;
+        }
+    }
+}
 
 export default JoblyAPI;

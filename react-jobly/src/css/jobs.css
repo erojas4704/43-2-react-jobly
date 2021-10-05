@@ -1,14 +1,14 @@
-.jobs-container{
+.jobs-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.job-card > *{
+.job-card>* {
     margin-bottom: .3rem;
 }
 
-.job-card{
+.job-card {
     width: 18rem;
     margin: 1rem;
     color: white;
@@ -17,9 +17,24 @@
     padding: .5rem;
 }
 
-.job-card-name{
+.job-card-name {
     font-weight: bold;
     font-size: 1.2rem;
     border-bottom: 1px solid white;
     margin-bottom: .3rem;
+}
+
+.card-button {
+    color: white;
+    background-color: #00000000;
+    border-radius: .1rem;
+    border: 1.5px solid white;
+    font-weight: bold;
+    height: 1.5rem;
+    width: 4rem;
+}
+
+.card-button:hover {
+    color: black;
+    background-color: white;
 }

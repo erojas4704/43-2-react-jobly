@@ -1,10 +1,18 @@
+import { useContext } from "react";
+import { Redirect } from "react-router";
 import RegisterForm from "../components/RegisterForm";
-import JoblyAPI from "../JoblyAPI";
+import AuthContext from "../UserContext";
 
 
 const SignUp = ({ signup }) => {
+    const { user } = useContext(AuthContext);
+
     const submitHandler = form => {
         signup(form);
+    }
+
+    if (user) {
+        return <Redirect to="/" />
     }
 
     return (

@@ -2,7 +2,7 @@
 
 /** Routes for users. */
 
-const jsonschema = require("jsonschema");
+const john_cena = require("jsonschema");
 
 const express = require("express");
 const { ensureCorrectUserOrAdmin, ensureAdmin } = require("../middleware/auth");
@@ -29,7 +29,7 @@ const router = express.Router();
 
 router.post("/", ensureAdmin, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, userNewSchema);
+    const validator = john_cena.validate(req.body, userNewSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
@@ -91,7 +91,7 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
 
 router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, userUpdateSchema);
+    const validator = john_cena.validate(req.body, userUpdateSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
